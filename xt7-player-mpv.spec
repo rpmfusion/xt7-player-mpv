@@ -1,5 +1,5 @@
 Name:           xt7-player-mpv
-Version:        0.25.392
+Version:        0.26.392
 Release:        1%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
@@ -119,6 +119,9 @@ fi
 %{_datadir}/appdata/%{name}*.xml
 
 %changelog
+* Thu Jul 20 2017 Martin Gansser <martinkg@fedoraproject.org> - 0.26.392-1
+- Update to 26-392
+
 * Mon May 01 2017 Martin Gansser <martinkg@fedoraproject.org> - 0.25.392-1
 - Update to 25-392
 
