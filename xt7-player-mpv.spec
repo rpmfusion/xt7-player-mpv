@@ -1,6 +1,6 @@
 Name:           xt7-player-mpv
-Version:        0.27.392
-Release:        2%{?dist}
+Version:        0.28.3100
+Release:        1%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
 Url:            http://xt7-player.sourceforge.net/xt7forum/
@@ -96,20 +96,6 @@ install -Dm 0644 xt7-player-mpv.appdata.xml %{buildroot}%{_datadir}/appdata/xt7-
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/*.appdata.xml
 
-%post
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-/usr/bin/update-desktop-database &> /dev/null || :
-
-%postun
-/usr/bin/update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-%posttrans
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
 %files
 %doc CHANGELOG_GIT
 %license LICENSE.TXT
@@ -119,6 +105,10 @@ fi
 %{_datadir}/appdata/%{name}*.xml
 
 %changelog
+* Wed May 16 2018 Martin Gansser <martinkg@fedoraproject.org> - 0.28.3100-1
+- Update to 0.28.3100
+- Remove scriptlets
+
 * Thu Mar 01 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 0.27.392-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
