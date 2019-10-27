@@ -1,13 +1,20 @@
+%global giturl  https://github.com/kokoko3k/xt7-player-mpv
+%global commit 3fac617d75389bc9c85c49131ad4cbbb5707c09e
+%global gitdate 20191016
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global gitrelease .%{gitdate}.git%{shortcommit}
+
 Name:           xt7-player-mpv
-Version:        0.29.3122
-Release:        3%{?dist}
+Version:        0.29.3142
+Release:        0.1%{?gitrelease}%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
-Url:            http://xt7-player.sourceforge.net/xt7forum/
-Source0:        https://github.com/kokoko3k/xt7-player-mpv/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+URL:            http://xt7-player.sourceforge.net/xt7forum/
+Source0:        %{giturl}/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
 
 BuildRequires:  libappstream-glib
 BuildRequires:  desktop-file-utils
+BuildRequires:  gettext
 BuildRequires:  gambas3-devel >= 3.8.4
 BuildRequires:  gambas3-gb-args
 BuildRequires:  gambas3-gb-compress
@@ -67,7 +74,7 @@ integration, dvbt, media tagging, library and playlist managment and a lot
 more.
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{?commit}%{?!commit:%{version}}
 sed -i '/project_group/d' xt7-player-mpv.appdata.xml
 
 %build
@@ -77,7 +84,7 @@ gba3
 %install
 # executable
 mkdir -p %{buildroot}%{_bindir}
-install -m755 %{name}-%{version}.gambas %{buildroot}%{_bindir}/%{name}.gambas
+install -m755 %{name}-%{commit}.gambas %{buildroot}%{_bindir}/%{name}.gambas
 
 #icons
 for size in 256 48 32 16; do
@@ -89,12 +96,12 @@ done
 desktop-file-install %{name}.desktop\
        --dir %{buildroot}%{_datadir}/applications
 
-mkdir -p %{buildroot}%{_datadir}/{applications,appdata}
-install -Dm 0644 xt7-player-mpv.appdata.xml %{buildroot}%{_datadir}/appdata/xt7-player-mpv.appdata.xml
+mkdir -p %{buildroot}%{_datadir}/{applications,metainfo}
+install -Dm 0644 xt7-player-mpv.appdata.xml %{buildroot}%{_metainfodir}/xt7-player-mpv.appdata.xml
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
-appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/*.appdata.xml
+appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 
 %files
 %doc CHANGELOG_GIT
@@ -102,9 +109,12 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/*.appdata.
 %{_bindir}/%{name}.gambas
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/appdata/%{name}*.xml
+%{_metainfodir}/%{name}*.xml
 
 %changelog
+* Sun Oct 27 2019 Leigh Scott <leigh123linux@googlemail.com> - 0.29.3142-0.1.20191016.git3fac617
+- Update to the latest git snapshot to fix compatibility with new mpv
+
 * Fri Aug 09 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.29.3122-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
