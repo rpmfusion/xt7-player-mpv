@@ -1,11 +1,11 @@
 %global giturl  https://github.com/kokoko3k/xt7-player-mpv
-%global commit 3fac617d75389bc9c85c49131ad4cbbb5707c09e
-%global gitdate 20191016
+%global commit 6e211dfbc6af44f3f68e1d6da3f1c27db6c329fd
+%global gitdate 20191030
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global gitrelease .%{gitdate}.git%{shortcommit}
 
 Name:           xt7-player-mpv
-Version:        0.29.3142
+Version:        0.30.3140
 Release:        0.1%{?gitrelease}%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
@@ -112,6 +112,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
+* Fri Nov 22 2019 Leigh Scott Martin Gansser <martinkg@fedoraproject.org> - 0.30.3140-0.1.20191030.git6e211df
+- Update to 0.30.3140-0.1.20191030.git6e211df
+
 * Sun Oct 27 2019 Leigh Scott <leigh123linux@googlemail.com> - 0.29.3142-0.1.20191016.git3fac617
 - Update to the latest git snapshot to fix compatibility with new mpv
 
