@@ -112,7 +112,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
-* Fri Nov 22 2019 Leigh Scott Martin Gansser <martinkg@fedoraproject.org> - 0.30.3140-0.1.20191030.git6e211df
+* Fri Nov 22 2019 Martin Gansser <martinkg@fedoraproject.org> - 0.30.3140-0.1.20191030.git6e211df
 - Update to 0.30.3140-0.1.20191030.git6e211df
 
 * Sun Oct 27 2019 Leigh Scott <leigh123linux@googlemail.com> - 0.29.3142-0.1.20191016.git3fac617
