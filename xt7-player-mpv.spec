@@ -5,12 +5,14 @@
 %global gitrelease .%{gitdate}.git%{shortcommit}
 
 Name:           xt7-player-mpv
-Version:        0.30.3140
-Release:        0.1%{?gitrelease}%{?dist}
+Version:        0.31.3143
+#Release:        0.1%%{?gitrelease}%%{?dist}
+Release:        1%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
 URL:            http://xt7-player.sourceforge.net/xt7forum/
-Source0:        %{giturl}/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
+#Source0:        %%{giturl}/archive/%%{commit}/%%{name}-%%{shortcommit}.tar.gz
+Source0:        %{giturl}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:  libappstream-glib
 BuildRequires:  desktop-file-utils
@@ -74,7 +76,8 @@ integration, dvbt, media tagging, library and playlist managment and a lot
 more.
 
 %prep
-%autosetup -p1 -n %{name}-%{?commit}%{?!commit:%{version}}
+%autosetup -p1 -n %{name}-%{version}
+#%%autosetup -p1 -n %%{name}-%%{?commit}%%{?!commit:%%{version}}
 sed -i '/project_group/d' xt7-player-mpv.appdata.xml
 
 %build
@@ -84,7 +87,8 @@ gba3
 %install
 # executable
 mkdir -p %{buildroot}%{_bindir}
-install -m755 %{name}-%{commit}.gambas %{buildroot}%{_bindir}/%{name}.gambas
+# install -m755 %{name}-%{commit}.gambas %{buildroot}%{_bindir}/%{name}.gambas
+install -m755 %{name}-%{version}.gambas %{buildroot}%{_bindir}/%{name}.gambas
 
 #icons
 for size in 256 48 32 16; do
@@ -112,6 +116,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
+* Wed Jan 29 2020 Martin Gansser <martinkg@fedoraproject.org> - 0.31.3143-1
+- Update to 0.31.3143
+
 * Fri Nov 22 2019 Martin Gansser <martinkg@fedoraproject.org> - 0.30.3140-0.1.20191030.git6e211df
 - Update to 0.30.3140-0.1.20191030.git6e211df
 
