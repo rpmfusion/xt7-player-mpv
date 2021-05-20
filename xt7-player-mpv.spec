@@ -5,14 +5,14 @@
 %global gitrelease .%{gitdate}.git%{shortcommit}
 
 Name:           xt7-player-mpv
-Version:        0.31.3143
+Version:        0.33.3152
 #Release:        0.1%%{?gitrelease}%%{?dist}
 Release:        3%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
 URL:            http://xt7-player.sourceforge.net/xt7forum/
 #Source0:        %%{giturl}/archive/%%{commit}/%%{name}-%%{shortcommit}.tar.gz
-Source0:        %{giturl}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        %{giturl}/archive/refs/tags/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:  libappstream-glib
 BuildRequires:  desktop-file-utils
@@ -116,6 +116,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
+* Thu May 20 2021 Martin Gansser <martinkg@fedoraproject.org> - 0.33.3152-1
+- Update to 0.33.3152
+
 * Thu Feb 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.31.3143-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
