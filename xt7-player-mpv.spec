@@ -18,6 +18,9 @@ BuildRequires:  libappstream-glib
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  gambas3-devel >= 3.8.4
+%if 0%{?fedora} >= 35
+BuildRequires:  gambas3-dev-tools
+%endif
 BuildRequires:  gambas3-gb-args
 BuildRequires:  gambas3-gb-compress
 BuildRequires:  gambas3-gb-db
@@ -118,6 +121,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %changelog
 * Thu May 20 2021 Martin Gansser <martinkg@fedoraproject.org> - 0.33.3152-1
 - Update to 0.33.3152
+- Add BR gambas3-dev-tools for fc35
 
 * Thu Feb 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.31.3143-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
