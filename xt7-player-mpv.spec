@@ -7,7 +7,7 @@
 Name:           xt7-player-mpv
 Version:        0.33.3152
 #Release:        0.1%%{?gitrelease}%%{?dist}
-Release:        1%{?dist}
+Release:        4%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
 URL:            http://xt7-player.sourceforge.net/xt7forum/
@@ -22,6 +22,7 @@ BuildRequires:  gambas3-devel >= 3.8.4
 %else
 BuildRequires:  gambas3-dev-tools
 BuildRequires:  gambas3-gb-desktop-x11
+BuildRequires:  gambas3-gb-qt5-wayland
 %endif
 BuildRequires:  gambas3-gb-args
 BuildRequires:  gambas3-gb-compress
@@ -121,10 +122,13 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
+* Fri May 21 2021 Martin Gansser <martinkg@fedoraproject.org> - 0.33.3152-4
+- Add BR gambas3-gb-qt5-wayland
+
 * Thu May 20 2021 Martin Gansser <martinkg@fedoraproject.org> - 0.33.3152-1
 - Update to 0.33.3152
-- Add BR gambas3-dev-tools for fc35
-- Add BR: gambas3-gb-desktop-x11 for fc35
+- Add BR gambas3-dev-tools
+- Add BR gambas3-gb-desktop-x11
 
 * Thu Feb 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.31.3143-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
