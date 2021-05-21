@@ -17,8 +17,9 @@ Source0:        %{giturl}/archive/refs/tags/%{version}.tar.gz#/%{name}-%{version
 BuildRequires:  libappstream-glib
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
+%if 0%{?fedora} <= 34
 BuildRequires:  gambas3-devel >= 3.8.4
-%if 0%{?fedora} >= 35
+%else
 BuildRequires:  gambas3-dev-tools
 %endif
 BuildRequires:  gambas3-gb-args
