@@ -5,7 +5,7 @@
 %global gitrelease .%{gitdate}.git%{shortcommit}
 
 Name:           xt7-player-mpv
-Version:        0.34.3170
+Version:        0.34.3172
 #Release:        0.1%%{?gitrelease}%%{?dist}
 Release:        1%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
@@ -122,7 +122,10 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
-* Wed Apr 13 2022 Martin Gansser <martinkg@fedoraproject.org> - 0.34.3170
+* Wed Jun 22 2022 Martin Gansser <martinkg@fedoraproject.org> - 0.34.3172-1
+- Update to 0.34.3172
+
+* Wed Apr 13 2022 Martin Gansser <martinkg@fedoraproject.org> - 0.34.3170-1
 - Update to 0.34.3170
 
 * Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.33.3162-2
