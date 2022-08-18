@@ -1,29 +1,27 @@
 %global giturl  https://github.com/kokoko3k/xt7-player-mpv
-%global commit 6e211dfbc6af44f3f68e1d6da3f1c27db6c329fd
-%global gitdate 20191030
+%global commit 1d28e4380f6a9fcebf12b90b51512c2790a39983
+%global gitdate 20210120
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global gitrelease .%{gitdate}.git%{shortcommit}
 
 Name:           xt7-player-mpv
 Version:        0.34.3172
 #Release:        0.1%%{?gitrelease}%%{?dist}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
 URL:            http://xt7-player.sourceforge.net/xt7forum/
-#Source0:        %%{giturl}/archive/%%{commit}/%%{name}-%%{shortcommit}.tar.gz
+# Source0:       %%{giturl}/archive/%%{commit}/%%{name}-%%{shortcommit}.tar.gz
 Source0:        %{giturl}/archive/refs/tags/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Patch0:         fix-desktop-file.patch
+Patch1:         fix-project-Component.patch
 
 BuildRequires:  libappstream-glib
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
-%if 0%{?fedora} <= 33
-BuildRequires:  gambas3-devel >= 3.8.4
-%else
 BuildRequires:  gambas3-dev-tools
 BuildRequires:  gambas3-gb-desktop-x11
 BuildRequires:  gambas3-gb-qt5-wayland
-%endif
 BuildRequires:  gambas3-gb-args
 BuildRequires:  gambas3-gb-compress
 BuildRequires:  gambas3-gb-db
@@ -87,13 +85,13 @@ more.
 sed -i '/project_group/d' xt7-player-mpv.appdata.xml
 
 %build
-gbc3 -e -a -g -t -p -m
+gbc3 -e -a -g -t -f public-module -f public-control
 gba3
 
 %install
 # executable
 mkdir -p %{buildroot}%{_bindir}
-# install -m755 %{name}-%{commit}.gambas %{buildroot}%{_bindir}/%{name}.gambas
+# install -m755 %%{name}-%%{commit}.gambas %%{buildroot}%%{_bindir}/%%{name}.gambas
 install -m755 %{name}-%{version}.gambas %{buildroot}%{_bindir}/%{name}.gambas
 
 #icons
@@ -122,6 +120,11 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
+* Thu Aug 18 2022 Martin Gansser <martinkg@fedoraproject.org> - 0.34.3172-3
+- Fixed gbc3 build command
+- Add fix-desktop-file.patch
+- Add fix-project-Component.patch
+
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.34.3172-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
