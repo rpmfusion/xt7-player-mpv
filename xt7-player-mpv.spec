@@ -7,7 +7,7 @@
 Name:           xt7-player-mpv
 Version:        0.37.3190
 #Release:        0.1%%{?gitrelease}%%{?dist}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Qt/Gambas gui to mpv media player
 License:        GPLv3+
 URL:            http://xt7-player.sourceforge.net/xt7forum/
@@ -119,6 +119,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.appdata.xml
 %{_metainfodir}/%{name}*.xml
 
 %changelog
+* Fri Aug 02 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.37.3190-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
+
 * Mon Jun 24 2024 Martin Gansser <martinkg@fedoraproject.org> - 0.37.3190-1
 - Update to 0.37.3190
 
